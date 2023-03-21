@@ -22,6 +22,7 @@ suspend fun main() {
     println("Вы выбрали ${if (result == 1) "Json" else "XML"} ")
 
     coroutineScope {
+        //it is better to name the job like downloadJob
         val job = launch(Dispatchers.IO) {
             myNews = if (result == 1) {
                 Repository(kiparoCom).getNewsJson()
@@ -30,9 +31,11 @@ suspend fun main() {
             }
         }
 
+        //It is nice to see such attitude to the UX
         launch {
             println("Устанавливаю соединение, пробую обработать данные")
             var dot = 1
+            //then here it is easier to read downloadJob.isActive
             while (job.isActive) {
                 if (dot % 100 == 0) println(".")
                 else print(".")
@@ -46,6 +49,7 @@ suspend fun main() {
     else println("\nДанные загружены и успешно обработаны")
 
     printCommandList()
+    //search variable is declared too far from the place of real use
     while (search) {
         println("\n'c' (анг раскладка)  - полный список команд, 'x' - завершить программу")
         println("\nВыберите команду:")
@@ -55,6 +59,7 @@ suspend fun main() {
             "3" -> myNews?.searchById()
             "4" -> myNews?.searchByTitle()
             "c" -> printCommandList()
+            //seems that you could use break instead of this extra variable
             "x" -> search = false
             else -> println("неверная команда")
         }
