@@ -14,6 +14,7 @@ class Repository(private var kiparoCom: GetFromNetwork) {
             val gsonAdapter = Gson().getAdapter(AllNews::class.java)
             gsonAdapter.fromJson(json)
         } catch (t: Throwable) {
+            //no UI interaction here, just throw 
             println("ошибка данных")
             null
         }
@@ -24,6 +25,7 @@ class Repository(private var kiparoCom: GetFromNetwork) {
             val serializer: Serializer = Persister()
             serializer.read(AllNews::class.java, xml)
         } catch (t: Throwable) {
+            //no UI interaction here, just throw 
             println("ошибка данных")
             null
         }
