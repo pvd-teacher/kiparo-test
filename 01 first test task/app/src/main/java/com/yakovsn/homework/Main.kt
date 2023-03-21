@@ -41,6 +41,26 @@ suspend fun main() {
             }
         }
     }
+    //And simply for the training purposes
+//       coroutineScope {
+//         val waitingJob = launch {
+//             println("Устанавливаю соединение, пробую обработать данные")
+//             var dot = 1
+//             //then here it is easier to read downloadJob.isActive
+//             while (true) {
+//                 if (dot % 100 == 0) println(".")
+//                 else print(".")
+//                 delay(50)
+//                 dot++
+//             }
+//         }
+
+//         launch(context = waitingJob) {
+//             //downloading
+//             delay(6000)
+//             waitingJob.cancel()
+//         }
+//     }
 
     if (myNews == null) return
     else println("\nДанные загружены и успешно обработаны")
